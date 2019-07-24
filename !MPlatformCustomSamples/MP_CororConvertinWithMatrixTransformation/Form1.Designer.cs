@@ -69,7 +69,7 @@
             this.OpenFile_btn.Name = "OpenFile_btn";
             this.OpenFile_btn.Size = new System.Drawing.Size(720, 23);
             this.OpenFile_btn.TabIndex = 1;
-            this.OpenFile_btn.Text = "OpenFile";
+            this.OpenFile_btn.Text = "Open File";
             this.OpenFile_btn.UseVisualStyleBackColor = true;
             this.OpenFile_btn.Click += new System.EventHandler(this.OpenFile_btn_Click);
             // 
@@ -90,6 +90,7 @@
             // 
             // PredifinedMatrix_txb
             // 
+            this.PredifinedMatrix_txb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.PredifinedMatrix_txb.Enabled = false;
             this.PredifinedMatrix_txb.FormattingEnabled = true;
             this.PredifinedMatrix_txb.Location = new System.Drawing.Point(793, 114);
@@ -139,6 +140,7 @@
             // 
             // ColorLevel_cmb
             // 
+            this.ColorLevel_cmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ColorLevel_cmb.Enabled = false;
             this.ColorLevel_cmb.FormattingEnabled = true;
             this.ColorLevel_cmb.Location = new System.Drawing.Point(793, 174);
@@ -219,6 +221,7 @@
             // 
             this.CurrentMatrix_txb.Location = new System.Drawing.Point(54, 13);
             this.CurrentMatrix_txb.Name = "CurrentMatrix_txb";
+            this.CurrentMatrix_txb.ReadOnly = true;
             this.CurrentMatrix_txb.Size = new System.Drawing.Size(720, 20);
             this.CurrentMatrix_txb.TabIndex = 15;
             // 

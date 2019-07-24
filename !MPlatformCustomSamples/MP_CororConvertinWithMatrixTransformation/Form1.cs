@@ -16,7 +16,7 @@ using MPLATFORMLib;
 namespace MP_CororConvertinWithMatrixTransformation
 {
     public partial class Form1 : Form
-    {         
+    {
         MPlaylistClass m_objMPLaylist;
         string filePath = String.Empty;
         MFFactoryClass m_objMFFactory;
@@ -38,7 +38,7 @@ namespace MP_CororConvertinWithMatrixTransformation
             aTimer.Enabled = true;
         }
 
-       
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -51,7 +51,7 @@ namespace MP_CororConvertinWithMatrixTransformation
             foreach (var c in colors)
             {
                 ColorLevel_cmb.Items.Add(c);
-            } 
+            }
             ColorLevel_cmb.SelectedIndex = 0;
             m_objMPLaylist = new MPlaylistClass();
 
@@ -102,13 +102,13 @@ namespace MP_CororConvertinWithMatrixTransformation
         private void OpenFile_btn_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK && openFileDialog1.FileNames.Length != 0)
-            { 
+            {
                 filePath = openFileDialog1.FileNames[0].ToString();
                 m_objMPLaylist.PlaylistAdd(null, filePath, "", ref index, out item);
             }
             m_objMPLaylist.PreviewWindowSet("", panelPr.Handle.ToInt32());
-            m_objMPLaylist.PreviewEnable("", 1,1);
-            m_objMPLaylist.FilePlayStart();        
+            m_objMPLaylist.PreviewEnable("", 1, 1);
+            m_objMPLaylist.FilePlayStart();
         }
 
         private void PredifinedMatrix_txb_SelectedIndexChanged(object sender, EventArgs e)
@@ -124,9 +124,9 @@ namespace MP_CororConvertinWithMatrixTransformation
             SetMatrix(matrix);
         }
 
-        double[] redColorValues =   { 0, 0, 0 };
-        double[] greenColorValues = { 0, 0, 0 };
-        double[] blueColorValues =  { 0, 0, 0 };        
+        double[] redColorValues = { 1, 0, 0 };
+        double[] greenColorValues = { 0, 1, 0 };
+        double[] blueColorValues = { 0, 0, 1 };
         double[] colorLevelValues = { 0, 0, 0 };
 
         void InitMatrix()
@@ -134,19 +134,18 @@ namespace MP_CororConvertinWithMatrixTransformation
             matrix = String.Empty;
             foreach (var v in redColorValues)
                 matrix += v.ToString(CultureInfo.InvariantCulture) + ",";
+            matrix += colorLevelValues[0].ToString(CultureInfo.InvariantCulture) + ",";
             foreach (var v in greenColorValues)
                 matrix += v.ToString(CultureInfo.InvariantCulture) + ",";
+            matrix += colorLevelValues[1].ToString(CultureInfo.InvariantCulture) + ",";
             foreach (var v in blueColorValues)
                 matrix += v.ToString(CultureInfo.InvariantCulture) + ",";
-            foreach (var v in colorLevelValues)
-                matrix += v.ToString(CultureInfo.InvariantCulture) + ",";
-
-            matrix = matrix.Substring(0, matrix.LastIndexOf(","));
-            Debug.WriteLine(matrix + "\n");
+            matrix += colorLevelValues[2].ToString(CultureInfo.InvariantCulture);
+            Debug.WriteLine(matrix);
             SetMatrix(matrix);
 
         }
-        void UpdateValue(double value, int trackBar=4)
+        void UpdateValue(double value, int trackBar = 4)
         {
             if (updatedColor == "Red")
             {
@@ -157,7 +156,7 @@ namespace MP_CororConvertinWithMatrixTransformation
             }
             if (updatedColor == "Green")
             {
-                if(trackBar!=4)
+                if (trackBar != 4)
                     greenColorValues[trackBar] = value;
                 if (trackBar == 4)
                     colorLevelValues[1] = value;
@@ -172,7 +171,7 @@ namespace MP_CororConvertinWithMatrixTransformation
 
             InitMatrix();
         }
-        
+
         void SetMatrix(string value)
         {
             if (canUpdate)
@@ -181,11 +180,11 @@ namespace MP_CororConvertinWithMatrixTransformation
                     m_objMPLaylist.PropsSet("object::gpu.rgb_transform_matrix", value);
                 Debug.WriteLine("We are setting matix with value: " + value + "\n");
                 CurrentMatrix_txb.Text = value;
-                canUpdate = false;                
+                canUpdate = true;
             }
 
         }
-        
+
         private void ATimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             canUpdate = true;
@@ -250,8 +249,8 @@ namespace MP_CororConvertinWithMatrixTransformation
                 Level_trb.Value = (int)(colorLevelValues[2] * 100);
             }
 
-        }       
-        
+        }
+
         void ChangeTextBoxValues(double[] array)
         {
             RedChannel_txb.Text = array[0].ToString();
@@ -264,7 +263,9 @@ namespace MP_CororConvertinWithMatrixTransformation
 
         private void Reset_btn_Click(object sender, EventArgs e)
         {
-            SetMatrix("false");
+            SetMatrix("1,0,0,0,0,1,0,0,0,0,1,0");
+            // reset sliders
+
         }
     }
 }
