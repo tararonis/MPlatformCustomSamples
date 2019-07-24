@@ -2,34 +2,34 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-// General Information about an assembly is controlled through the following
-// set of attributes. Change these attribute values to modify the information
+// General Inormation about an assembly is controlled through the ollowing
+// set o attributes. Change these attribute values to modiy the inormation
 // associated with an assembly.
-[assembly: AssemblyTitle("MP_CororConvertinWithMatrixTransformation")]
+[assembly: AssemblyTitle("MP_CororConvertinWithMatrixTransormation")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MP_CororConvertinWithMatrixTransformation")]
+[assembly: AssemblyProduct("MP_CororConvertinWithMatrixTransormation")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-// Setting ComVisible to false makes the types in this assembly not visible
-// to COM components.  If you need to access a type in this assembly from
+// Setting ComVisible to alse makes the types in this assembly not visible
+// to COM components.  I you need to access a type in this assembly rom
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
 
-// The following GUID is for the ID of the typelib if this project is exposed to COM
+// The ollowing GUID is or the ID o the typelib i this project is exposed to COM
 [assembly: Guid("e85966c0-b7ba-46aa-98e0-514610a13572")]
 
-// Version information for an assembly consists of the following four values:
+// Version inormation or an assembly consists o the ollowing our values:
 //
 //      Major Version
 //      Minor Version
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Build and Revision Numbers
+// You can speciy all the values or you can deault the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]

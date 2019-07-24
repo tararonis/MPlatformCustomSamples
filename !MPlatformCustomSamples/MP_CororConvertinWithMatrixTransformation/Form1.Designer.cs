@@ -33,11 +33,11 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.GpuPipilineOn_btn = new System.Windows.Forms.Button();
             this.PredifinedMatrix_txb = new System.Windows.Forms.ComboBox();
-            this.R_trb = new System.Windows.Forms.TrackBar();
-            this.G_trb = new System.Windows.Forms.TrackBar();
-            this.B_trb = new System.Windows.Forms.TrackBar();
+            this.Red_trb = new System.Windows.Forms.TrackBar();
+            this.Green_trb = new System.Windows.Forms.TrackBar();
+            this.Blue_trb = new System.Windows.Forms.TrackBar();
             this.ColorLevel_cmb = new System.Windows.Forms.ComboBox();
-            this.Level_trb = new System.Windows.Forms.TrackBar();
+            this.Constant_trb = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -49,10 +49,14 @@
             this.GreenChannel_txb = new System.Windows.Forms.TextBox();
             this.BlueChannel_txb = new System.Windows.Forms.TextBox();
             this.ConstantChannel_txb = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.R_trb)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.G_trb)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.B_trb)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Level_trb)).BeginInit();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.Red_trb)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Green_trb)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Blue_trb)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Constant_trb)).BeginInit();
             this.SuspendLayout();
             // 
             // panelPr
@@ -99,44 +103,44 @@
             this.PredifinedMatrix_txb.TabIndex = 4;
             this.PredifinedMatrix_txb.SelectedIndexChanged += new System.EventHandler(this.PredifinedMatrix_txb_SelectedIndexChanged);
             // 
-            // R_trb
+            // Red_trb
             // 
-            this.R_trb.Enabled = false;
-            this.R_trb.LargeChange = 50;
-            this.R_trb.Location = new System.Drawing.Point(793, 229);
-            this.R_trb.Maximum = 200;
-            this.R_trb.Minimum = -200;
-            this.R_trb.Name = "R_trb";
-            this.R_trb.Size = new System.Drawing.Size(223, 45);
-            this.R_trb.SmallChange = 20;
-            this.R_trb.TabIndex = 5;
-            this.R_trb.Scroll += new System.EventHandler(this.R_trb_Scroll);
+            this.Red_trb.Enabled = false;
+            this.Red_trb.LargeChange = 20;
+            this.Red_trb.Location = new System.Drawing.Point(793, 229);
+            this.Red_trb.Maximum = 250;
+            this.Red_trb.Minimum = -250;
+            this.Red_trb.Name = "Red_trb";
+            this.Red_trb.Size = new System.Drawing.Size(223, 45);
+            this.Red_trb.SmallChange = 10;
+            this.Red_trb.TabIndex = 5;
+            this.Red_trb.Scroll += new System.EventHandler(this.R_trb_Scroll);
             // 
-            // G_trb
+            // Green_trb
             // 
-            this.G_trb.Enabled = false;
-            this.G_trb.LargeChange = 50;
-            this.G_trb.Location = new System.Drawing.Point(793, 295);
-            this.G_trb.Maximum = 200;
-            this.G_trb.Minimum = -200;
-            this.G_trb.Name = "G_trb";
-            this.G_trb.Size = new System.Drawing.Size(223, 45);
-            this.G_trb.SmallChange = 20;
-            this.G_trb.TabIndex = 6;
-            this.G_trb.Scroll += new System.EventHandler(this.G_trb_Scroll);
+            this.Green_trb.Enabled = false;
+            this.Green_trb.LargeChange = 20;
+            this.Green_trb.Location = new System.Drawing.Point(793, 295);
+            this.Green_trb.Maximum = 250;
+            this.Green_trb.Minimum = -250;
+            this.Green_trb.Name = "Green_trb";
+            this.Green_trb.Size = new System.Drawing.Size(223, 45);
+            this.Green_trb.SmallChange = 10;
+            this.Green_trb.TabIndex = 6;
+            this.Green_trb.Scroll += new System.EventHandler(this.G_trb_Scroll);
             // 
-            // B_trb
+            // Blue_trb
             // 
-            this.B_trb.Enabled = false;
-            this.B_trb.LargeChange = 50;
-            this.B_trb.Location = new System.Drawing.Point(793, 363);
-            this.B_trb.Maximum = 200;
-            this.B_trb.Minimum = -200;
-            this.B_trb.Name = "B_trb";
-            this.B_trb.Size = new System.Drawing.Size(223, 45);
-            this.B_trb.SmallChange = 20;
-            this.B_trb.TabIndex = 7;
-            this.B_trb.Scroll += new System.EventHandler(this.B_trb_Scroll);
+            this.Blue_trb.Enabled = false;
+            this.Blue_trb.LargeChange = 20;
+            this.Blue_trb.Location = new System.Drawing.Point(793, 363);
+            this.Blue_trb.Maximum = 250;
+            this.Blue_trb.Minimum = -250;
+            this.Blue_trb.Name = "Blue_trb";
+            this.Blue_trb.Size = new System.Drawing.Size(223, 45);
+            this.Blue_trb.SmallChange = 10;
+            this.Blue_trb.TabIndex = 7;
+            this.Blue_trb.Scroll += new System.EventHandler(this.B_trb_Scroll);
             // 
             // ColorLevel_cmb
             // 
@@ -149,18 +153,18 @@
             this.ColorLevel_cmb.TabIndex = 8;
             this.ColorLevel_cmb.SelectedIndexChanged += new System.EventHandler(this.ColorLevel_cmb_SelectedIndexChanged);
             // 
-            // Level_trb
+            // Constant_trb
             // 
-            this.Level_trb.Enabled = false;
-            this.Level_trb.LargeChange = 50;
-            this.Level_trb.Location = new System.Drawing.Point(793, 448);
-            this.Level_trb.Maximum = 200;
-            this.Level_trb.Minimum = -200;
-            this.Level_trb.Name = "Level_trb";
-            this.Level_trb.Size = new System.Drawing.Size(223, 45);
-            this.Level_trb.SmallChange = 20;
-            this.Level_trb.TabIndex = 9;
-            this.Level_trb.Scroll += new System.EventHandler(this.Level_trb_Scroll);
+            this.Constant_trb.Enabled = false;
+            this.Constant_trb.LargeChange = 20;
+            this.Constant_trb.Location = new System.Drawing.Point(793, 448);
+            this.Constant_trb.Maximum = 250;
+            this.Constant_trb.Minimum = -250;
+            this.Constant_trb.Name = "Constant_trb";
+            this.Constant_trb.Size = new System.Drawing.Size(223, 45);
+            this.Constant_trb.SmallChange = 10;
+            this.Constant_trb.TabIndex = 9;
+            this.Constant_trb.Scroll += new System.EventHandler(this.Level_trb_Scroll);
             // 
             // label1
             // 
@@ -227,37 +231,93 @@
             // 
             // RedChannel_txb
             // 
-            this.RedChannel_txb.Location = new System.Drawing.Point(976, 210);
+            this.RedChannel_txb.Enabled = false;
+            this.RedChannel_txb.Location = new System.Drawing.Point(964, 206);
             this.RedChannel_txb.Name = "RedChannel_txb";
-            this.RedChannel_txb.Size = new System.Drawing.Size(40, 20);
+            this.RedChannel_txb.Size = new System.Drawing.Size(52, 20);
             this.RedChannel_txb.TabIndex = 16;
+            this.RedChannel_txb.Text = "0";
+            this.RedChannel_txb.TextChanged += new System.EventHandler(this.RedChannel_txb_TextChanged);
             // 
             // GreenChannel_txb
             // 
-            this.GreenChannel_txb.Location = new System.Drawing.Point(976, 279);
+            this.GreenChannel_txb.Enabled = false;
+            this.GreenChannel_txb.Location = new System.Drawing.Point(964, 272);
             this.GreenChannel_txb.Name = "GreenChannel_txb";
-            this.GreenChannel_txb.Size = new System.Drawing.Size(40, 20);
+            this.GreenChannel_txb.Size = new System.Drawing.Size(52, 20);
             this.GreenChannel_txb.TabIndex = 17;
+            this.GreenChannel_txb.Text = "0";
+            this.GreenChannel_txb.TextChanged += new System.EventHandler(this.GreenChannel_txb_TextChanged);
             // 
             // BlueChannel_txb
             // 
-            this.BlueChannel_txb.Location = new System.Drawing.Point(976, 340);
+            this.BlueChannel_txb.Enabled = false;
+            this.BlueChannel_txb.Location = new System.Drawing.Point(964, 340);
             this.BlueChannel_txb.Name = "BlueChannel_txb";
-            this.BlueChannel_txb.Size = new System.Drawing.Size(40, 20);
+            this.BlueChannel_txb.Size = new System.Drawing.Size(52, 20);
             this.BlueChannel_txb.TabIndex = 18;
+            this.BlueChannel_txb.Text = "0";
+            this.BlueChannel_txb.TextChanged += new System.EventHandler(this.BlueChannel_txb_TextChanged);
             // 
             // ConstantChannel_txb
             // 
-            this.ConstantChannel_txb.Location = new System.Drawing.Point(976, 425);
+            this.ConstantChannel_txb.Enabled = false;
+            this.ConstantChannel_txb.Location = new System.Drawing.Point(964, 425);
             this.ConstantChannel_txb.Name = "ConstantChannel_txb";
-            this.ConstantChannel_txb.Size = new System.Drawing.Size(40, 20);
+            this.ConstantChannel_txb.Size = new System.Drawing.Size(52, 20);
             this.ConstantChannel_txb.TabIndex = 19;
+            this.ConstantChannel_txb.Text = "0";
+            this.ConstantChannel_txb.TextChanged += new System.EventHandler(this.ConstantChannel_txb_TextChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.3F);
+            this.label6.Location = new System.Drawing.Point(1022, 209);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(18, 15);
+            this.label6.TabIndex = 20;
+            this.label6.Text = "%";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.3F);
+            this.label7.Location = new System.Drawing.Point(1022, 277);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(18, 15);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "%";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.3F);
+            this.label8.Location = new System.Drawing.Point(1022, 343);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(18, 15);
+            this.label8.TabIndex = 22;
+            this.label8.Text = "%";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.3F);
+            this.label9.Location = new System.Drawing.Point(1022, 428);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(18, 15);
+            this.label9.TabIndex = 23;
+            this.label9.Text = "%";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1040, 665);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.ConstantChannel_txb);
             this.Controls.Add(this.BlueChannel_txb);
             this.Controls.Add(this.GreenChannel_txb);
@@ -269,11 +329,11 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.Level_trb);
+            this.Controls.Add(this.Constant_trb);
             this.Controls.Add(this.ColorLevel_cmb);
-            this.Controls.Add(this.B_trb);
-            this.Controls.Add(this.G_trb);
-            this.Controls.Add(this.R_trb);
+            this.Controls.Add(this.Blue_trb);
+            this.Controls.Add(this.Green_trb);
+            this.Controls.Add(this.Red_trb);
             this.Controls.Add(this.PredifinedMatrix_txb);
             this.Controls.Add(this.GpuPipilineOn_btn);
             this.Controls.Add(this.OpenFile_btn);
@@ -281,10 +341,10 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.R_trb)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.G_trb)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.B_trb)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Level_trb)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Red_trb)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Green_trb)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Blue_trb)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Constant_trb)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -297,11 +357,11 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button GpuPipilineOn_btn;
         private System.Windows.Forms.ComboBox PredifinedMatrix_txb;
-        private System.Windows.Forms.TrackBar R_trb;
-        private System.Windows.Forms.TrackBar G_trb;
-        private System.Windows.Forms.TrackBar B_trb;
+        private System.Windows.Forms.TrackBar Red_trb;
+        private System.Windows.Forms.TrackBar Green_trb;
+        private System.Windows.Forms.TrackBar Blue_trb;
         private System.Windows.Forms.ComboBox ColorLevel_cmb;
-        private System.Windows.Forms.TrackBar Level_trb;
+        private System.Windows.Forms.TrackBar Constant_trb;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -313,6 +373,10 @@
         private System.Windows.Forms.TextBox GreenChannel_txb;
         private System.Windows.Forms.TextBox BlueChannel_txb;
         private System.Windows.Forms.TextBox ConstantChannel_txb;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
     }
 }
 

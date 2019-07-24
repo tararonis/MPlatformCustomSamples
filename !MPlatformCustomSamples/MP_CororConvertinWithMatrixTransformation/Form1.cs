@@ -17,47 +17,114 @@ namespace MP_CororConvertinWithMatrixTransformation
 {
     public partial class Form1 : Form
     {
-        MPlaylistClass m_objMPLaylist;
-        string filePath = String.Empty;
-        MFFactoryClass m_objMFFactory;
-        string[] predifinedMatrixes = { "Custom", "BT2020_BT709", "BT709_BT2020", "RGB_YUV_601", "RGB_YUV_709", "RGB_YUV_2020", "YUV_RGB_601", "YUV_RGB_709", "YUV_RGB_2020", "Full_To_16_235", "Full_From_16_235" };
-        string[] colors = { "Red", "Green", "Blue" };
-        string matrix = String.Empty;
+        MFFactoryClass m_objMFFactory; //need to set GPU_PIPELINE
         bool gpu_p = false;
-        private static System.Timers.Timer aTimer;
+
+        MFileClass m_objMFile; //Object for Playback
+        string filePath = String.Empty;        
+        
+        Dictionary<string, double[]> Matrixes = new Dictionary<string, double[]>(); //Container for all Predifined matrixes
+        string[] colors = { "Red", "Green", "Blue" }; //Color Channels
+
+        string matrix = String.Empty; // The value that we are setting with PropsSet method
+        double[] customMatrix = new double[12];   
 
         string updatedColor = String.Empty;
-        bool canUpdate = false;
 
         public Form1()
         {
             InitializeComponent();
-            aTimer = new System.Timers.Timer(100);
-            aTimer.Elapsed += ATimer_Elapsed;
-            aTimer.AutoReset = true;
-            aTimer.Enabled = true;
+            InitMarrixes();
         }
-
-
+        void InitMarrixes()
+        {
+            Matrixes.Add("Default", new double[] {
+                1, 0, 0, 0,
+                0, 1, 0, 0,
+                0, 0, 1, 0 });
+            Matrixes.Add("Grayscale", new double[] {
+                1, 0, 0, 0,
+                1, 0, 0, 0,
+                1, 0, 0, 0 });
+            Matrixes.Add("ReverseColors", new double[] {
+                1.5,1.5,1.5,-1,
+                1.5,1.5,1.5,1,
+                1.5,1.5,1.5,-1 });
+            Matrixes.Add("BT2020_BT709", new double[] {
+                1.6605, -0.5876, -0.0728,    0.0,
+                -0.1246,  1.1329, -0.0083,   0.0,
+                -0.0182, -0.1006,  1.1187,   0.0 });
+            Matrixes.Add("BT709_BT2020", new double[] {
+                0.627,     0.329,     0.0433,    0.0,
+                0.0691,    0.92,      0.0113,    0.0,
+                0.0164,    0.088,     0.896,     0.0});
+            Matrixes.Add("RGB_YUV_601", new double[] {
+                0.257,  0.504,  0.098, 0.0625,
+                -0.148, -0.291,  0.439, 0.500,
+                0.439, -0.368, -0.071, 0.500});
+            Matrixes.Add("RGB_YUV_709", new double[] {
+                0.183,  0.614,  0.062, 0.0625,
+                -0.101, -0.338,  0.439, 0.500,
+                0.439, -0.399, -0.040, 0.500});
+            Matrixes.Add("RGB_YUV_2020", new double[] {
+                0.225613,  0.582282,  0.050928, 0.062745,
+                -0.119918, -0.309494,  0.429412, 0.500,
+                0.429412, -0.394875, -0.034537, 0.500});
+            Matrixes.Add("RGB_YUV_2020_Limited", new double[] {
+                0.2627,  0.6780,  0.0593,  0.0,
+                -0.139630, -0.360370,  0.5, 0.500,
+                0.5, -0.459786, -0.040214, 0.500 });
+            Matrixes.Add("YUV_RGB_601", new double[] {
+                1.164,  0.000,  1.596, -0.87075,
+                1.164, -0.813, -0.391,  0.52925,
+                1.164,  2.018,  0.000, -1.08175, });
+            Matrixes.Add("YUV_RGB_709", new double[] {
+                1.164,  0.000,  1.793, -0.96925,
+                1.164, -0.213, -0.534,  0.30075,
+                1.164,  2.115,  0.000, -1.13025 });
+            Matrixes.Add("YUV_RGB_2020", new double[] {
+                1.164384,0.000000,1.717000,-0.931559,
+                1.164384,-0.191603,-0.665274,0.355379,
+                1.164384,2.190671,0.000000,-1.168395});
+            Matrixes.Add("YUV_RGB_2020_Limited", new double[] {
+                1.0, 0.0, 1.474600,  -0.737300,
+                1.0, -0.164553, -0.571353, 0.367953,
+                1.0,  1.881400,  0.0, -0.940700 });
+            Matrixes.Add("Full_To_16_235", new double[] {
+                0.856305, 0.0, 0.0, 0.0625,
+                0.0, 0.856305,  0.0, 0.0625,
+                0.0, 0.0, 0.856305, 0.0625});
+            Matrixes.Add("Full_rom_16_235", new double[] {
+                1.167808, 0.0, 0.0, -0.0729880,
+                0.0, 1.167808, 0.0, -0.0729880,
+                0.0, 0.0, 1.167808, -0.0729880 });
+            Matrixes.Add("Custom", new double[] {
+                1, 0, 0, 0,
+                0, 1, 0, 0,
+                0, 0, 1, 0 });
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            foreach (var m in predifinedMatrixes)
+            //Filing the comboboxes with Matrixes and ColorChannels 
+            foreach (var m in Matrixes)
             {
-                PredifinedMatrix_txb.Items.Add(m);
+                PredifinedMatrix_txb.Items.Add(m.Key);
             }
-            PredifinedMatrix_txb.SelectedIndex = 0;
+            PredifinedMatrix_txb.SelectedIndex = Matrixes.Count-1;
 
             foreach (var c in colors)
             {
                 ColorLevel_cmb.Items.Add(c);
             }
             ColorLevel_cmb.SelectedIndex = 0;
-            m_objMPLaylist = new MPlaylistClass();
 
-            InitMatrix();
+            m_objMFile = new MFileClass();
+
+
         }
 
+        //This feature is working only with GPU_PIPELINE.
         private void GpuPipilineOn_btn_Click(object sender, EventArgs e)
         {
             if (!gpu_p)
@@ -72,123 +139,78 @@ namespace MP_CororConvertinWithMatrixTransformation
                 Reset_btn.Enabled = true;
                 PredifinedMatrix_txb.Enabled = true;
                 ColorLevel_cmb.Enabled = true;
-                R_trb.Enabled = true;
-                G_trb.Enabled = true;
-                B_trb.Enabled = true;
-                Level_trb.Enabled = true;
+                Red_trb.Enabled = true;
+                Green_trb.Enabled = true;
+                Blue_trb.Enabled = true;
+                Constant_trb.Enabled = true;
+                RedChannel_txb.Enabled = true;
+                GreenChannel_txb.Enabled = true;
+                BlueChannel_txb.Enabled = true;
+                ConstantChannel_txb.Enabled = true;
 
-                m_objMPLaylist.FilePosGet(out double position);
-                m_objMPLaylist.FilePlayStop(0);
-                Marshal.ReleaseComObject(m_objMPLaylist);
+                //When we turn on the gpu_pipeline we need to recreate objects.
+                //To continue playback from same position we take current and save it
+                m_objMFile.FilePosGet(out double position);
+                m_objMFile.FilePlayStop(0);
 
-                m_objMPLaylist = new MPlaylistClass();
+                Marshal.ReleaseComObject(m_objMFile);
 
-                m_objMPLaylist.PreviewWindowSet("", panelPr.Handle.ToInt32());
-                m_objMPLaylist.PreviewEnable("", 1, 1);
+                m_objMFile = new MFileClass();
+
+                m_objMFile.PreviewWindowSet("", panelPr.Handle.ToInt32());
+                m_objMFile.PreviewEnable("", 1, 1);
 
                 if (filePath.Length > 1)
                 {
-                    index = -1;
-
-                    m_objMPLaylist.PlaylistAdd(null, filePath, "", ref index, out item);
-                    m_objMPLaylist.FilePosSet(position, 0);
-                    m_objMPLaylist.FilePlayStart();
-                }
+                    m_objMFile.FileNameSet(filePath, "loop=true");
+                    m_objMFile.FilePosSet(position, 0);
+                    m_objMFile.FilePlayStart();
+                }                
+                PredifinedMatrix_txb.SelectedIndex = 0;
             }
         }
 
-        int index = -1;
-        MItem item;
+
         private void OpenFile_btn_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK && openFileDialog1.FileNames.Length != 0)
             {
                 filePath = openFileDialog1.FileNames[0].ToString();
-                m_objMPLaylist.PlaylistAdd(null, filePath, "", ref index, out item);
+                m_objMFile.FileNameSet(filePath, "loop=true");
             }
-            m_objMPLaylist.PreviewWindowSet("", panelPr.Handle.ToInt32());
-            m_objMPLaylist.PreviewEnable("", 1, 1);
-            m_objMPLaylist.FilePlayStart();
+            m_objMFile.PreviewWindowSet("", panelPr.Handle.ToInt32());
+            m_objMFile.PreviewEnable("", 1, 1);
+            m_objMFile.FilePlayStart();
         }
 
+        //Select the matrix from the ComboBox
         private void PredifinedMatrix_txb_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ComboBox comboBox = (ComboBox)sender;
-            string selected = (string)comboBox.SelectedItem;
-
-            SetMatrix(selected);
-        }
-
-        private void SetColorConvertion_btn_Click(object sender, EventArgs e)
-        {
-            SetMatrix(matrix);
-        }
-
-        double[] redColorValues = { 1, 0, 0 };
-        double[] greenColorValues = { 0, 1, 0 };
-        double[] blueColorValues = { 0, 0, 1 };
-        double[] colorLevelValues = { 0, 0, 0 };
-
-        void InitMatrix()
-        {
-            matrix = String.Empty;
-            foreach (var v in redColorValues)
-                matrix += v.ToString(CultureInfo.InvariantCulture) + ",";
-            matrix += colorLevelValues[0].ToString(CultureInfo.InvariantCulture) + ",";
-            foreach (var v in greenColorValues)
-                matrix += v.ToString(CultureInfo.InvariantCulture) + ",";
-            matrix += colorLevelValues[1].ToString(CultureInfo.InvariantCulture) + ",";
-            foreach (var v in blueColorValues)
-                matrix += v.ToString(CultureInfo.InvariantCulture) + ",";
-            matrix += colorLevelValues[2].ToString(CultureInfo.InvariantCulture);
-            Debug.WriteLine(matrix);
-            SetMatrix(matrix);
-
-        }
-        void UpdateValue(double value, int trackBar = 4)
-        {
-            if (updatedColor == "Red")
+            if (gpu_p)
             {
-                if (trackBar != 4)
-                    redColorValues[trackBar] = value;
-                if (trackBar == 4)
-                    colorLevelValues[0] = value;
+                ComboBox comboBox = (ComboBox)sender;
+                string selected = (string)comboBox.SelectedItem;
+                SetMatrix(Matrixes[selected]);
             }
-            if (updatedColor == "Green")
-            {
-                if (trackBar != 4)
-                    greenColorValues[trackBar] = value;
-                if (trackBar == 4)
-                    colorLevelValues[1] = value;
-            }
-            if (updatedColor == "Blue")
-            {
-                if (trackBar != 4)
-                    blueColorValues[trackBar] = value;
-                if (trackBar == 4)
-                    colorLevelValues[2] = value;
-            }
-
-            InitMatrix();
         }
 
-        void SetMatrix(string value)
+        void SetMatrix(double[] value)
         {
-            if (canUpdate)
+            matrix = null;
+            for (int i = 0; i < customMatrix.Length; i++)
             {
-                if (m_objMPLaylist != null)
-                    m_objMPLaylist.PropsSet("object::gpu.rgb_transform_matrix", value);
-                Debug.WriteLine("We are setting matix with value: " + value + "\n");
-                CurrentMatrix_txb.Text = value;
-                canUpdate = true;
+                customMatrix[i] = value[i];
+                matrix += value[i].ToString(CultureInfo.InvariantCulture) + ",";
             }
+            if (m_objMFile != null)
+                m_objMFile.PropsSet("object::gpu.rgb_transform_matrix", matrix);
 
+            Debug.WriteLine("We are setting matix with value: " + matrix + "\n");
+
+            CurrentMatrix_txb.Text = matrix;
+            UpdateVisualData(ColorLevel_cmb.SelectedItem.ToString());
         }
 
-        private void ATimer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            canUpdate = true;
-        }
         private void R_trb_Scroll(object sender, EventArgs e)
         {
             TrackBar trackBar = (TrackBar)sender;
@@ -218,7 +240,28 @@ namespace MP_CororConvertinWithMatrixTransformation
             TrackBar trackBar = (TrackBar)sender;
             double selected = (double)trackBar.Value / 100;
             ConstantChannel_txb.Text = selected.ToString(CultureInfo.InvariantCulture);
-            UpdateValue(selected);
+            UpdateValue(selected, 3);
+        }
+        void UpdateValue(double value, int trackBar)
+        {
+            if (updatedColor == "Red")
+            {
+                customMatrix[trackBar] = value;
+            }
+            if (updatedColor == "Green")
+            {
+                customMatrix[trackBar] = value;
+            }
+            if (updatedColor == "Blue")
+            {
+                customMatrix[trackBar] = value;
+            }
+
+            Matrixes["Custom"] = customMatrix;
+
+            PredifinedMatrix_txb.SelectedIndex = Matrixes.Count - 1;
+
+            SetMatrix(Matrixes["Custom"]);
         }
 
         private void ColorLevel_cmb_SelectedIndexChanged(object sender, EventArgs e)
@@ -228,44 +271,107 @@ namespace MP_CororConvertinWithMatrixTransformation
 
             updatedColor = selected;
 
-            if (selected == "Red")
-            {
-                ChangeTextBoxValues(redColorValues);
-                ConstantChannel_txb.Text = colorLevelValues[0].ToString();
-                Level_trb.Value = (int)(colorLevelValues[0] * 100);
-            }
-
-            if (selected == "Green")
-            {
-                ChangeTextBoxValues(greenColorValues);
-                ConstantChannel_txb.Text = colorLevelValues[1].ToString();
-                Level_trb.Value = (int)(colorLevelValues[1] * 100);
-            }
-
-            if (selected == "Blue")
-            {
-                ChangeTextBoxValues(blueColorValues);
-                ConstantChannel_txb.Text = colorLevelValues[2].ToString();
-                Level_trb.Value = (int)(colorLevelValues[2] * 100);
-            }
+            UpdateVisualData(updatedColor);
 
         }
-
-        void ChangeTextBoxValues(double[] array)
+        void UpdateVisualData(string curColor)
         {
-            RedChannel_txb.Text = array[0].ToString();
-            R_trb.Value = (int)(array[0] * 100);
-            GreenChannel_txb.Text = array[1].ToString();
-            G_trb.Value = (int)(array[1] * 100);
-            BlueChannel_txb.Text = array[2].ToString();
-            B_trb.Value = (int)(array[2] * 100);
+            if (curColor == "Red")
+            {
+                ChangeTextBoxesAndTrackbarsValues(customMatrix[0], customMatrix[1], customMatrix[2], customMatrix[3]);
+            }
+
+            if (curColor == "Green")
+            {
+                ChangeTextBoxesAndTrackbarsValues(customMatrix[4], customMatrix[5], customMatrix[6], customMatrix[7]);
+            }
+
+            if (curColor == "Blue")
+            {
+                ChangeTextBoxesAndTrackbarsValues(customMatrix[8], customMatrix[9], customMatrix[10], customMatrix[11]);
+            }
+        }
+
+        void ChangeTextBoxesAndTrackbarsValues(double red, double green, double blue, double constant)
+        {
+            if (red > 0)
+                RedChannel_txb.Text = "+" + (red * 100).ToString();
+
+            else if (red == 0)
+                RedChannel_txb.Text = (red * 100).ToString();
+
+            else if (red < 0)
+                RedChannel_txb.Text = (red * 100).ToString();
+
+            Red_trb.Value = (int)(red * 100);
+
+            if (green > 0)            
+                GreenChannel_txb.Text = "+" + (green * 100).ToString();                
+            
+            else if (green == 0)
+                GreenChannel_txb.Text = (green * 100).ToString();
+
+            if (green < 0)
+                GreenChannel_txb.Text = (green * 100).ToString();
+
+            Green_trb.Value = (int)(green * 100);
+
+            if (blue > 0)            
+                BlueChannel_txb.Text ="+" + (blue * 100).ToString();                
+            
+            else if (blue == 0)
+                BlueChannel_txb.Text = (blue * 100).ToString();
+
+            if (blue < 0)
+                BlueChannel_txb.Text = (blue * 100).ToString();
+
+            Blue_trb.Value = (int)(blue * 100);
+
+            if (constant > 0)
+                ConstantChannel_txb.Text = "+" + (constant * 100).ToString();
+
+            else if (constant == 0)
+                ConstantChannel_txb.Text = (constant * 100).ToString();
+
+            else if (constant < 0)
+                ConstantChannel_txb.Text = (constant * 100).ToString();
+
+            Constant_trb.Value = (int)(constant * 100);
         }
 
         private void Reset_btn_Click(object sender, EventArgs e)
         {
-            SetMatrix("1,0,0,0,0,1,0,0,0,0,1,0");
-            // reset sliders
+            PredifinedMatrix_txb.SelectedIndex = 0;
+        }
 
+        private void RedChannel_txb_TextChanged(object sender, EventArgs e)
+        {
+            TextBox comboBox = (TextBox)sender;
+            string selected = (string)comboBox.Text;
+
+            double value;
+            Double.TryParse(selected, out value);
+
+            Debug.WriteLine("Changed Value from Text Box: " + value);
+            //UpdateValue(value/100, 0);
+        }
+
+        private void GreenChannel_txb_TextChanged(object sender, EventArgs e)
+        {
+            TextBox comboBox = (TextBox)sender;
+            string selected = (string)comboBox.Text;
+        }
+
+        private void BlueChannel_txb_TextChanged(object sender, EventArgs e)
+        {
+            TextBox comboBox = (TextBox)sender;
+            string selected = (string)comboBox.Text;
+        }
+
+        private void ConstantChannel_txb_TextChanged(object sender, EventArgs e)
+        {
+            TextBox comboBox = (TextBox)sender;
+            string selected = (string)comboBox.Text;
         }
     }
 }
