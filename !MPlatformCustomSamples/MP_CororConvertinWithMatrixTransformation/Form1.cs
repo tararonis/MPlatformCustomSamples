@@ -77,7 +77,7 @@ namespace MP_CororConvertinWithMatrixTransformation
             Matrixes.Add("YUV_RGB_601", new double[] {
                 1.164,  0.000,  1.596, -0.87075,
                 1.164, -0.813, -0.391,  0.52925,
-                1.164,  2.018,  0.000, -1.08175, });
+                1.164,  2.018,  0.000, -1.08175 });
             Matrixes.Add("YUV_RGB_709", new double[] {
                 1.164,  0.000,  1.793, -0.96925,
                 1.164, -0.213, -0.534,  0.30075,
@@ -94,7 +94,7 @@ namespace MP_CororConvertinWithMatrixTransformation
                 0.856305, 0.0, 0.0, 0.0625,
                 0.0, 0.856305,  0.0, 0.0625,
                 0.0, 0.0, 0.856305, 0.0625});
-            Matrixes.Add("Full_rom_16_235", new double[] {
+            Matrixes.Add("Full_from_16_235", new double[] {
                 1.167808, 0.0, 0.0, -0.0729880,
                 0.0, 1.167808, 0.0, -0.0729880,
                 0.0, 0.0, 1.167808, -0.0729880 });
@@ -121,11 +121,15 @@ namespace MP_CororConvertinWithMatrixTransformation
 
             m_objMFile = new MFileClass();
 
-
         }
 
         //This feature is working only with GPU_PIPELINE.
         private void GpuPipilineOn_btn_Click(object sender, EventArgs e)
+        {
+            TurnOnGPU_Pipeline();
+        }
+
+        void TurnOnGPU_Pipeline()
         {
             if (!gpu_p)
             {
@@ -165,7 +169,7 @@ namespace MP_CororConvertinWithMatrixTransformation
                     m_objMFile.FileNameSet(filePath, "loop=true");
                     m_objMFile.FilePosSet(position, 0);
                     m_objMFile.FilePlayStart();
-                }                
+                }
                 PredifinedMatrix_txb.SelectedIndex = 0;
             }
         }
@@ -244,17 +248,18 @@ namespace MP_CororConvertinWithMatrixTransformation
         }
         void UpdateValue(double value, int trackBar)
         {
+            
             if (updatedColor == "Red")
             {
                 customMatrix[trackBar] = value;
             }
             if (updatedColor == "Green")
             {
-                customMatrix[trackBar] = value;
+                customMatrix[trackBar +4] = value;
             }
             if (updatedColor == "Blue")
             {
-                customMatrix[trackBar] = value;
+                customMatrix[trackBar+8] = value;
             }
 
             Matrixes["Custom"] = customMatrix;
@@ -344,34 +349,6 @@ namespace MP_CororConvertinWithMatrixTransformation
             PredifinedMatrix_txb.SelectedIndex = 0;
         }
 
-        private void RedChannel_txb_TextChanged(object sender, EventArgs e)
-        {
-            TextBox comboBox = (TextBox)sender;
-            string selected = (string)comboBox.Text;
-
-            double value;
-            Double.TryParse(selected, out value);
-
-            Debug.WriteLine("Changed Value from Text Box: " + value);
-            //UpdateValue(value/100, 0);
-        }
-
-        private void GreenChannel_txb_TextChanged(object sender, EventArgs e)
-        {
-            TextBox comboBox = (TextBox)sender;
-            string selected = (string)comboBox.Text;
-        }
-
-        private void BlueChannel_txb_TextChanged(object sender, EventArgs e)
-        {
-            TextBox comboBox = (TextBox)sender;
-            string selected = (string)comboBox.Text;
-        }
-
-        private void ConstantChannel_txb_TextChanged(object sender, EventArgs e)
-        {
-            TextBox comboBox = (TextBox)sender;
-            string selected = (string)comboBox.Text;
-        }
+       
     }
 }

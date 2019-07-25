@@ -62,6 +62,7 @@
             // panelPr
             // 
             this.panelPr.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panelPr.BackgroundImage = global::MP_CororConvertinWithMatrixTransformation.Properties.Resources.turn_on;
             this.panelPr.Location = new System.Drawing.Point(54, 48);
             this.panelPr.Name = "panelPr";
             this.panelPr.Size = new System.Drawing.Size(720, 576);
@@ -84,9 +85,9 @@
             // GpuPipilineOn_btn
             // 
             this.GpuPipilineOn_btn.BackColor = System.Drawing.Color.Red;
-            this.GpuPipilineOn_btn.Location = new System.Drawing.Point(793, 24);
+            this.GpuPipilineOn_btn.Location = new System.Drawing.Point(805, 12);
             this.GpuPipilineOn_btn.Name = "GpuPipilineOn_btn";
-            this.GpuPipilineOn_btn.Size = new System.Drawing.Size(223, 23);
+            this.GpuPipilineOn_btn.Size = new System.Drawing.Size(223, 21);
             this.GpuPipilineOn_btn.TabIndex = 2;
             this.GpuPipilineOn_btn.Text = "GPU PIPELINE = OFF";
             this.GpuPipilineOn_btn.UseVisualStyleBackColor = false;
@@ -97,7 +98,7 @@
             this.PredifinedMatrix_txb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.PredifinedMatrix_txb.Enabled = false;
             this.PredifinedMatrix_txb.FormattingEnabled = true;
-            this.PredifinedMatrix_txb.Location = new System.Drawing.Point(793, 114);
+            this.PredifinedMatrix_txb.Location = new System.Drawing.Point(805, 103);
             this.PredifinedMatrix_txb.Name = "PredifinedMatrix_txb";
             this.PredifinedMatrix_txb.Size = new System.Drawing.Size(223, 21);
             this.PredifinedMatrix_txb.TabIndex = 4;
@@ -107,7 +108,7 @@
             // 
             this.Red_trb.Enabled = false;
             this.Red_trb.LargeChange = 20;
-            this.Red_trb.Location = new System.Drawing.Point(793, 229);
+            this.Red_trb.Location = new System.Drawing.Point(805, 218);
             this.Red_trb.Maximum = 250;
             this.Red_trb.Minimum = -250;
             this.Red_trb.Name = "Red_trb";
@@ -120,7 +121,7 @@
             // 
             this.Green_trb.Enabled = false;
             this.Green_trb.LargeChange = 20;
-            this.Green_trb.Location = new System.Drawing.Point(793, 295);
+            this.Green_trb.Location = new System.Drawing.Point(805, 284);
             this.Green_trb.Maximum = 250;
             this.Green_trb.Minimum = -250;
             this.Green_trb.Name = "Green_trb";
@@ -133,7 +134,7 @@
             // 
             this.Blue_trb.Enabled = false;
             this.Blue_trb.LargeChange = 20;
-            this.Blue_trb.Location = new System.Drawing.Point(793, 363);
+            this.Blue_trb.Location = new System.Drawing.Point(805, 352);
             this.Blue_trb.Maximum = 250;
             this.Blue_trb.Minimum = -250;
             this.Blue_trb.Name = "Blue_trb";
@@ -147,7 +148,7 @@
             this.ColorLevel_cmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ColorLevel_cmb.Enabled = false;
             this.ColorLevel_cmb.FormattingEnabled = true;
-            this.ColorLevel_cmb.Location = new System.Drawing.Point(793, 174);
+            this.ColorLevel_cmb.Location = new System.Drawing.Point(805, 163);
             this.ColorLevel_cmb.Name = "ColorLevel_cmb";
             this.ColorLevel_cmb.Size = new System.Drawing.Size(223, 21);
             this.ColorLevel_cmb.TabIndex = 8;
@@ -157,7 +158,7 @@
             // 
             this.Constant_trb.Enabled = false;
             this.Constant_trb.LargeChange = 20;
-            this.Constant_trb.Location = new System.Drawing.Point(793, 448);
+            this.Constant_trb.Location = new System.Drawing.Point(805, 437);
             this.Constant_trb.Maximum = 250;
             this.Constant_trb.Minimum = -250;
             this.Constant_trb.Name = "Constant_trb";
@@ -169,7 +170,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(790, 158);
+            this.label1.Location = new System.Drawing.Point(802, 147);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(84, 13);
             this.label1.TabIndex = 0;
@@ -178,7 +179,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(790, 213);
+            this.label2.Location = new System.Drawing.Point(802, 200);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(30, 13);
             this.label2.TabIndex = 10;
@@ -187,7 +188,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(790, 279);
+            this.label3.Location = new System.Drawing.Point(802, 268);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(39, 13);
             this.label3.TabIndex = 11;
@@ -196,7 +197,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(794, 347);
+            this.label4.Location = new System.Drawing.Point(802, 336);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(31, 13);
             this.label4.TabIndex = 12;
@@ -205,7 +206,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(794, 432);
+            this.label5.Location = new System.Drawing.Point(806, 421);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(52, 13);
             this.label5.TabIndex = 13;
@@ -213,7 +214,7 @@
             // 
             // Reset_btn
             // 
-            this.Reset_btn.Location = new System.Drawing.Point(793, 71);
+            this.Reset_btn.Location = new System.Drawing.Point(805, 60);
             this.Reset_btn.Name = "Reset_btn";
             this.Reset_btn.Size = new System.Drawing.Size(223, 23);
             this.Reset_btn.TabIndex = 14;
@@ -232,8 +233,9 @@
             // RedChannel_txb
             // 
             this.RedChannel_txb.Enabled = false;
-            this.RedChannel_txb.Location = new System.Drawing.Point(964, 206);
+            this.RedChannel_txb.Location = new System.Drawing.Point(976, 195);
             this.RedChannel_txb.Name = "RedChannel_txb";
+            this.RedChannel_txb.ReadOnly = true;
             this.RedChannel_txb.Size = new System.Drawing.Size(52, 20);
             this.RedChannel_txb.TabIndex = 16;
             this.RedChannel_txb.Text = "0";
@@ -242,8 +244,9 @@
             // GreenChannel_txb
             // 
             this.GreenChannel_txb.Enabled = false;
-            this.GreenChannel_txb.Location = new System.Drawing.Point(964, 272);
+            this.GreenChannel_txb.Location = new System.Drawing.Point(976, 261);
             this.GreenChannel_txb.Name = "GreenChannel_txb";
+            this.GreenChannel_txb.ReadOnly = true;
             this.GreenChannel_txb.Size = new System.Drawing.Size(52, 20);
             this.GreenChannel_txb.TabIndex = 17;
             this.GreenChannel_txb.Text = "0";
@@ -252,8 +255,9 @@
             // BlueChannel_txb
             // 
             this.BlueChannel_txb.Enabled = false;
-            this.BlueChannel_txb.Location = new System.Drawing.Point(964, 340);
+            this.BlueChannel_txb.Location = new System.Drawing.Point(976, 329);
             this.BlueChannel_txb.Name = "BlueChannel_txb";
+            this.BlueChannel_txb.ReadOnly = true;
             this.BlueChannel_txb.Size = new System.Drawing.Size(52, 20);
             this.BlueChannel_txb.TabIndex = 18;
             this.BlueChannel_txb.Text = "0";
@@ -262,8 +266,9 @@
             // ConstantChannel_txb
             // 
             this.ConstantChannel_txb.Enabled = false;
-            this.ConstantChannel_txb.Location = new System.Drawing.Point(964, 425);
+            this.ConstantChannel_txb.Location = new System.Drawing.Point(976, 414);
             this.ConstantChannel_txb.Name = "ConstantChannel_txb";
+            this.ConstantChannel_txb.ReadOnly = true;
             this.ConstantChannel_txb.Size = new System.Drawing.Size(52, 20);
             this.ConstantChannel_txb.TabIndex = 19;
             this.ConstantChannel_txb.Text = "0";
@@ -273,7 +278,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.3F);
-            this.label6.Location = new System.Drawing.Point(1022, 209);
+            this.label6.Location = new System.Drawing.Point(1034, 198);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(18, 15);
             this.label6.TabIndex = 20;
@@ -283,7 +288,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.3F);
-            this.label7.Location = new System.Drawing.Point(1022, 277);
+            this.label7.Location = new System.Drawing.Point(1034, 266);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(18, 15);
             this.label7.TabIndex = 21;
@@ -293,7 +298,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.3F);
-            this.label8.Location = new System.Drawing.Point(1022, 343);
+            this.label8.Location = new System.Drawing.Point(1034, 332);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(18, 15);
             this.label8.TabIndex = 22;
@@ -303,7 +308,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.3F);
-            this.label9.Location = new System.Drawing.Point(1022, 428);
+            this.label9.Location = new System.Drawing.Point(1034, 417);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(18, 15);
             this.label9.TabIndex = 23;
