@@ -18,6 +18,7 @@ namespace MP_fastTranscoding
         MWriterClass m_objWriter;
         MFileClass m_objFile;
         const string destination = @"udp://192.168.0.104:5000";
+        string tempPath = @"M:\TempVideo\IS_Adele\ISadele\*.dpx";
         public Form1()
         {
             InitializeComponent();
@@ -36,16 +37,19 @@ namespace MP_fastTranscoding
         {           
             //m_objFile.PropsSet("active_frc", "false");
             //m_objFile.PropsSet("preview.drop_frames", "true");
-            m_objFile.FileNameSet(openFile_txb.Text, "external_process=false experimental.mfcodecs=true experimental.out_video_packets=true");   
-         
+            //m_objFile.FileNameSet(openFile_txb.Text, "external_process=false experimental.mfcodecs=true experimental.out_video_packets=true");
+            m_objFile.FileNameSet(tempPath, "");
             m_objFile.FilePlayStart();
 
-            m_objWriter.PropsSet("external_process", "false");
+            //m_objWriter.PropsSet("external_process", "false");
             //m_objWriter.PropsSet("rate_control", "true");
             //m_objWriter.PropsSet("pull_mode", "false");
 
-            if(savePath_txb!=null)
-                m_objWriter.WriterNameSet(savePath_txb.Text, "format='mp4' video::codec='packets' audio::codec='audio_packets'"); 
+            if (savePath_txb != null)
+            {
+                //m_objWriter.WriterNameSet(savePath_txb.Text, "format='mp4' video::codec='packets' audio::codec='audio_packets'");
+                m_objWriter.WriterNameSet(savePath_txb.Text, "format='mp4' video::codec='n264' audio::codec='aac'");
+            }
             else
                 m_objWriter.WriterNameSet(destination, " format='mpegts' protocol='udp://' video::codec='packets' audio::codec='audio_packets'");
             
