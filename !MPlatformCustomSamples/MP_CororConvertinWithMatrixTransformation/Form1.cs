@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
 using System.Windows.Forms;
 using MPLATFORMLib;
 
@@ -21,13 +15,13 @@ namespace MP_CororConvertinWithMatrixTransformation
         bool gpu_p = false;
 
         MFileClass m_objMFile; //Object for Playback
-        string filePath = String.Empty;        
-        
+        string filePath = String.Empty;
+
         Dictionary<string, double[]> Matrixes = new Dictionary<string, double[]>(); //Container for all Predifined matrixes
         string[] colors = { "Red", "Green", "Blue" }; //Color Channels
 
         string matrix = String.Empty; // The value that we are setting with PropsSet method
-        double[] customMatrix = new double[12];   
+        double[] customMatrix = new double[12];
 
         string updatedColor = String.Empty;
 
@@ -46,10 +40,14 @@ namespace MP_CororConvertinWithMatrixTransformation
                 1, 0, 0, 0,
                 1, 0, 0, 0,
                 1, 0, 0, 0 });
-            Matrixes.Add("ReverseColors", new double[] {
+            Matrixes.Add("Black&White", new double[] {
                 1.5,1.5,1.5,-1,
-                1.5,1.5,1.5,1,
+                1.5,1.5,1.5,-1,
                 1.5,1.5,1.5,-1 });
+            Matrixes.Add("Negative", new double[] {
+                -1, 0, 0, 1,
+                0, -1, 0, 1,
+                0, 0, -1, 1 });
             Matrixes.Add("BT2020_BT709", new double[] {
                 1.6605, -0.5876, -0.0728,    0.0,
                 -0.1246,  1.1329, -0.0083,   0.0,
@@ -111,7 +109,7 @@ namespace MP_CororConvertinWithMatrixTransformation
             {
                 PredifinedMatrix_txb.Items.Add(m.Key);
             }
-            PredifinedMatrix_txb.SelectedIndex = Matrixes.Count-1;
+            PredifinedMatrix_txb.SelectedIndex = Matrixes.Count - 1;
 
             foreach (var c in colors)
             {
@@ -161,7 +159,7 @@ namespace MP_CororConvertinWithMatrixTransformation
 
                 m_objMFile = new MFileClass();
 
-                m_objMFile.PreviewWindowSet("", panelPr.Handle.ToInt32());
+                m_objMFile.PreviewWindowSet("", panelPreview.Handle.ToInt32());
                 m_objMFile.PreviewEnable("", 1, 1);
 
                 if (filePath.Length > 1)
@@ -181,10 +179,12 @@ namespace MP_CororConvertinWithMatrixTransformation
             {
                 filePath = openFileDialog1.FileNames[0].ToString();
                 m_objMFile.FileNameSet(filePath, "loop=true");
+
+                m_objMFile.PreviewWindowSet("", panelPreview.Handle.ToInt32());
+                m_objMFile.PreviewEnable("", 1, 1);
+                m_objMFile.FilePlayStart();
+                path_txb.Text = filePath;
             }
-            m_objMFile.PreviewWindowSet("", panelPr.Handle.ToInt32());
-            m_objMFile.PreviewEnable("", 1, 1);
-            m_objMFile.FilePlayStart();
         }
 
         //Select the matrix from the ComboBox
@@ -206,6 +206,8 @@ namespace MP_CororConvertinWithMatrixTransformation
                 customMatrix[i] = value[i];
                 matrix += value[i].ToString(CultureInfo.InvariantCulture) + ",";
             }
+            matrix = matrix.Substring(0, matrix.LastIndexOf(","));
+
             if (m_objMFile != null)
                 m_objMFile.PropsSet("object::gpu.rgb_transform_matrix", matrix);
 
@@ -248,18 +250,18 @@ namespace MP_CororConvertinWithMatrixTransformation
         }
         void UpdateValue(double value, int trackBar)
         {
-            
+
             if (updatedColor == "Red")
             {
                 customMatrix[trackBar] = value;
             }
             if (updatedColor == "Green")
             {
-                customMatrix[trackBar +4] = value;
+                customMatrix[trackBar + 4] = value;
             }
             if (updatedColor == "Blue")
             {
-                customMatrix[trackBar+8] = value;
+                customMatrix[trackBar + 8] = value;
             }
 
             Matrixes["Custom"] = customMatrix;
@@ -310,9 +312,9 @@ namespace MP_CororConvertinWithMatrixTransformation
 
             Red_trb.Value = (int)(red * 100);
 
-            if (green > 0)            
-                GreenChannel_txb.Text = "+" + (green * 100).ToString();                
-            
+            if (green > 0)
+                GreenChannel_txb.Text = "+" + (green * 100).ToString();
+
             else if (green == 0)
                 GreenChannel_txb.Text = (green * 100).ToString();
 
@@ -321,9 +323,9 @@ namespace MP_CororConvertinWithMatrixTransformation
 
             Green_trb.Value = (int)(green * 100);
 
-            if (blue > 0)            
-                BlueChannel_txb.Text ="+" + (blue * 100).ToString();                
-            
+            if (blue > 0)
+                BlueChannel_txb.Text = "+" + (blue * 100).ToString();
+
             else if (blue == 0)
                 BlueChannel_txb.Text = (blue * 100).ToString();
 
@@ -349,6 +351,9 @@ namespace MP_CororConvertinWithMatrixTransformation
             PredifinedMatrix_txb.SelectedIndex = 0;
         }
 
-       
+        private void CopyToClipBoard_btn_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(CurrentMatrix_txb.Text);
+        }
     }
 }
