@@ -31,6 +31,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
+            this.ChangePreviewType_btn = new System.Windows.Forms.Button();
+            this.SeekToTheEnd_btn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -61,11 +63,33 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // ChangePreviewType_btn
+            // 
+            this.ChangePreviewType_btn.Location = new System.Drawing.Point(296, 13);
+            this.ChangePreviewType_btn.Name = "ChangePreviewType_btn";
+            this.ChangePreviewType_btn.Size = new System.Drawing.Size(75, 194);
+            this.ChangePreviewType_btn.TabIndex = 3;
+            this.ChangePreviewType_btn.Text = "ChangePreviewType Cur-dx11";
+            this.ChangePreviewType_btn.UseVisualStyleBackColor = true;
+            this.ChangePreviewType_btn.Click += new System.EventHandler(this.ChangePreviewType_btn_Click);
+            // 
+            // SeekToTheEnd_btn
+            // 
+            this.SeekToTheEnd_btn.Location = new System.Drawing.Point(296, 214);
+            this.SeekToTheEnd_btn.Name = "SeekToTheEnd_btn";
+            this.SeekToTheEnd_btn.Size = new System.Drawing.Size(75, 68);
+            this.SeekToTheEnd_btn.TabIndex = 4;
+            this.SeekToTheEnd_btn.Text = "SeekToTheEnd";
+            this.SeekToTheEnd_btn.UseVisualStyleBackColor = true;
+            this.SeekToTheEnd_btn.Click += new System.EventHandler(this.SeekToTheEnd_btn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(339, 317);
+            this.ClientSize = new System.Drawing.Size(380, 317);
+            this.Controls.Add(this.SeekToTheEnd_btn);
+            this.Controls.Add(this.ChangePreviewType_btn);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button1);
@@ -81,6 +105,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button ChangePreviewType_btn;
+        private System.Windows.Forms.Button SeekToTheEnd_btn;
     }
 }
 

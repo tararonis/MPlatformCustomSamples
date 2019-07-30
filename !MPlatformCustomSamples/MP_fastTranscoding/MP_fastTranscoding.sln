@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MP_fastTranscoding", "MP_fastTranscoding.csproj", "{60EBBB9A-836E-4838-B2A8-399B16A9D2AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60EBBB9A-836E-4838-B2A8-399B16A9D2AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60EBBB9A-836E-4838-B2A8-399B16A9D2AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60EBBB9A-836E-4838-B2A8-399B16A9D2AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60EBBB9A-836E-4838-B2A8-399B16A9D2AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {446B7249-E2E5-4907-91CA-798A5792B08E}
+	EndGlobalSection
+EndGlobal

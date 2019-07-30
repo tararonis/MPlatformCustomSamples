@@ -37,14 +37,14 @@
             this.panelPr.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.panelPr.Location = new System.Drawing.Point(36, 12);
             this.panelPr.Name = "panelPr";
-            this.panelPr.Size = new System.Drawing.Size(436, 303);
+            this.panelPr.Size = new System.Drawing.Size(516, 363);
             this.panelPr.TabIndex = 0;
             // 
             // Start_btn
             // 
-            this.Start_btn.Location = new System.Drawing.Point(36, 338);
+            this.Start_btn.Location = new System.Drawing.Point(36, 381);
             this.Start_btn.Name = "Start_btn";
-            this.Start_btn.Size = new System.Drawing.Size(436, 23);
+            this.Start_btn.Size = new System.Drawing.Size(516, 23);
             this.Start_btn.TabIndex = 1;
             this.Start_btn.Text = "Start";
             this.Start_btn.UseVisualStyleBackColor = true;
