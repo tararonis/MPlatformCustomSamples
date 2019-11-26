@@ -1,0 +1,83 @@
+﻿<Window x:Class="CreateManifest.RedistributionMaker"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CreateManifest"
+        mc:Ignorable="d" Loaded="Window_Loaded"
+        Title="Redistribution Maker" Height="720" Width="300" WindowStartupLocation="CenterScreen">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Row="0" Header="Build configuration">
+            <StackPanel>
+                <CheckBox Name="cbox_x86">x86</CheckBox>
+                <CheckBox Name="cbox_x64">x64</CheckBox>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Grid.Row="2" Header="What objects do you use in code?">
+            <StackPanel>
+                <CheckBox Name="cbox_MFCore" IsChecked="True" IsEnabled="False">Core components</CheckBox>
+                <CheckBox Name="cbox_MFile">MFile</CheckBox>
+                <CheckBox Name="cbox_MWriter" >MWriter</CheckBox>
+                <CheckBox Name="cbox_Mixer" >MMixer</CheckBox>
+                <CheckBox Name="cbox_Playlist" >MPlaylist</CheckBox>
+                <CheckBox Name="cbox_MLive" Checked="EnableDevices" Unchecked="DisableDevices">MLive</CheckBox>
+                <CheckBox Name="cbox_MRenderer" Checked="EnableDevices" Unchecked="DisableDevices">MRenderer</CheckBox>
+                <CheckBox Name="cbox_MPreview">MPreview</CheckBox>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Grid.Row="4" Header="What devices do you use?" Name="groupDevices">
+            <StackPanel>
+                <CheckBox Name="cbox_MBMD"  Content="Blackmagic Design"/>
+                <CheckBox Name="cbox_MAJA" Content="AJA"/>
+                <CheckBox Name="cbox_MNDI" Content="NDI"/>
+                <CheckBox Name="cbox_MWebcameras" Content="Web cameras" />
+                <CheckBox Name="cbox_MScreen" Content="Screen Capture engine" />
+                <CheckBox Name="cbox_MWebCapture" Content="Web Capture engine" />
+                <CheckBox Name="cbox_MSL" Content="Stream Labs" />
+                <CheckBox Name="cbox_MBF" Content="BlueFish444" />
+                <CheckBox Name="cbox_MDelta" Content="DELTACAST" />
+                <CheckBox Name="cbox_MMage" Content="Magewell" />
+                <CheckBox Name="cbox_MWebRTC">MWebRTC</CheckBox>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Grid.Row="6" Header="What plugins do you use in code?">
+            <StackPanel>
+                <CheckBox Name="cbox_MHTML5">HTML</CheckBox>
+                <CheckBox Name="cbox_MChromaKey">ChromaKey</CheckBox>
+                <CheckBox Name="cbox_MCCDisplay">CCDisplay</CheckBox>
+                <CheckBox Name="cbox_MDelay">Delay</CheckBox>
+                <CheckBox Name="cbox_MColors">ColorsPlugin</CheckBox>
+                <CheckBox Name="cbox_MCharGen">CharGen</CheckBox>
+                <CheckBox Name="cbox_MFDTMF">DTMF</CheckBox>
+            </StackPanel>
+        </GroupBox>
+        <Grid Grid.Row="7" VerticalAlignment="Bottom" Margin="0,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0"/>
+                <ColumnDefinition Width="20"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>                
+            </Grid.RowDefinitions>
+            <Label Content="Output folder:" Grid.Row="0" Grid.Column="0" Margin="-5"/>
+            <TextBox Name="tbOutputFolder" Grid.Row="2" Grid.Column="0"/>
+            <Button Grid.Column="3" Grid.Row="2" Content="..." Click="ChooseOutputFolder"/>
+        </Grid>
+        <Button Grid.Row="8" Height="40" Content="Generate" Click="Button_Click"></Button>
+        <Button x:Name="DT_btn" Content="DT" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="7" VerticalAlignment="Top" Width="75" Click="DT_btn_Click"/>
+    </Grid>
+</Window>
