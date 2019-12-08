@@ -22,8 +22,11 @@ namespace S_BuildServerWatcher
             processInstaller = new ServiceProcessInstaller();
 
             processInstaller.Account = ServiceAccount.LocalSystem;
+            //processInstaller.Username = "BuildServer3";
+            //processInstaller.Password = "medialooks";
+            
             serviceInstaller.StartType = ServiceStartMode.Manual;
-            serviceInstaller.ServiceName = "BuildServerWatcher";
+            serviceInstaller.ServiceName = "MedialooksServerWatcher";
             Installers.Add(processInstaller);
             Installers.Add(serviceInstaller);
         }

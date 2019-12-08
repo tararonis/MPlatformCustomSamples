@@ -20,6 +20,9 @@ namespace S_BuildServerWatcher
         Thread m_threadWorker;
         private System.Timers.Timer aTimer;
 
+        string username = "BuildServer3";
+        string password = "medialooks";
+
         ITerminalServicesManager manager;
         Dictionary<string, string> nerds = new Dictionary<string, string>
         {
@@ -30,38 +33,60 @@ namespace S_BuildServerWatcher
             {"4", "Olga" },
             {"Censored", "Unknown" }
         };
-        const string workingPath = @"\\MLDiskStation\MLFiles\!EmptyEveryNight\";
+        const string workingPath = @"\\192.168.0.100\MLFiles\!EmptyEveryNight\";
         string createdFile = "null";
         bool BuildServerIsFree = true;
-        string currentLord = "free";
+        string currentLord = "start";
 
         public Service1()
         {
             InitializeComponent();
-            this.ServiceName = "BuildServerWatcher";
+            
             this.CanStop = true; // службу можно остановить
             this.CanPauseAndContinue = true;
         }
-
-        private void thread_DoWork(CancellationToken token)
-        {
-            aTimer = new System.Timers.Timer(1000);
-            aTimer.Elapsed += ATimer_Elapsed;
-            aTimer.AutoReset = true;
-            aTimer.Enabled = true;
-
-        }
+        
+        //private void thread_DoWork(CancellationToken token)
+        //{
+        //    if (start)
+        //    {
+        //        manager = new TerminalServicesManager();
+        //        aTimer = new System.Timers.Timer(1000);
+        //        aTimer.Elapsed += ATimer_Elapsed;
+        //        aTimer.AutoReset = true;
+        //        aTimer.Enabled = true;
+        //        start = !start;
+        //    }
+        //}
 
         private void ATimer_Elapsed(object sender, ElapsedEventArgs e)
         {
+            Debug("!EnterTheThread");
+            try
+            {
+                File.Create(workingPath + "iTsAlive");
+            }
+            catch
+            {
+                Debug("!Can't create in Empty");
+            }
+            manager = new TerminalServicesManager();
+            
             if (manager.CurrentSession.ClientIPAddress != null)
+            {
                 BuildServerIsFree = false;
+                Debug("!EnterThefalse");
+            }
             else
+            {
                 BuildServerIsFree = true;
+                Debug("!EnterThetrue");
+            }
 
 
             if (!BuildServerIsFree)
             {
+                Debug("!EnterThefalse1");
                 if (!IsTheSameLord())
                 {
                     DeleteFreeFlag();
@@ -71,11 +96,14 @@ namespace S_BuildServerWatcher
             }
             else if (BuildServerIsFree)
             {
-                if (!String.IsNullOrEmpty(createdFile) && createdFile != String.Empty && currentLord != "free")
+                Debug("!EnterThetrue1");
+                if (!String.IsNullOrEmpty(createdFile) && currentLord != "free")
                 {
                     File.Delete(createdFile);
                     ShowThatServerIsFree();
                 }
+                Debug("!1" + createdFile);
+                Debug("!2" + currentLord);
             }
 
             GC.Collect();
@@ -94,6 +122,7 @@ namespace S_BuildServerWatcher
 
         void CreateFile(string ip)
         {
+            Debug("!EnterTheCreateFile");
             try
             {
                 if (!BuildServerIsFree)
@@ -129,6 +158,7 @@ namespace S_BuildServerWatcher
 
         private void ShowThatServerIsFree()
         {
+            Debug("!EnterTheShowThatServerIsFree");
             try
             {
                 CreateFile("");
@@ -136,7 +166,7 @@ namespace S_BuildServerWatcher
             }
             catch
             {
-                throw new Exception("Can't delete the source:" + createdFile);                
+                Debug("!EnterTheShowThatServerIsFree_catch");
             }
         }
 
@@ -154,14 +184,25 @@ namespace S_BuildServerWatcher
 
         protected override void OnStart(string[] args)
         {
-            cancelSource = new CancellationTokenSource();
-            m_threadWorker = new Thread(() => thread_DoWork(cancelSource.Token));
-            m_threadWorker.Name = "thread_DoWork";
-            m_threadWorker.Start();
+            //cancelSource = new CancellationTokenSource();
+            //m_threadWorker = new Thread(() => thread_DoWork(cancelSource.Token));
+            //m_threadWorker.Name = "thread_DoWork";
+            //m_threadWorker.Start();
+                aTimer = new System.Timers.Timer(1000);
+                aTimer.Elapsed += ATimer_Elapsed;
+                aTimer.AutoReset = true;
+                aTimer.Enabled = true;
+              
         }
 
         protected override void OnStop()
         {
+        }
+
+        string pathD= @"C:\Users\BuildServer3\Desktop\!temp\service\";
+        void Debug(string mes)
+        {
+            File.Create(pathD+mes);
         }
     }
 }
